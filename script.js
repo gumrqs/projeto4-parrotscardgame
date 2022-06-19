@@ -15,17 +15,24 @@ const cartas = ['bobrossparrot.gif',
 ];
 
 const cartasSelecionadas = [];
+let cartasEscolhidas = [];
+let contadorCartasEncontradas = 0;
 
 let numeroCartas;
 
-function desvirar(elemento){
-    elemento.querySelector(".frente").classList.remove("virada");
-    elemento.querySelector(".verso").classList.remove("desvirada");
+
+
+function desvirar(carta1, carta2){
+    carta1.querySelector(".frente").classList.remove("virada");
+    carta1.querySelector(".verso").classList.remove("desvirada");
+
+    carta2.querySelector(".frente").classList.remove("virada");
+    carta2.querySelector(".verso").classList.remove("desvirada");
 }
 
 function validarNumeroCartas(){
     
-    numeroCartas= prompt("Com quantas cartas deseja jogar?(4 à 14)");
+    numeroCartas= Number(prompt("Com quantas cartas deseja jogar?(4 à 14)"));
 // condições de jogo:
 //  precisa ser apenas numeros pares %2===0
 // precisa ser sobre numeros 
@@ -42,10 +49,12 @@ function validarNumeroCartas(){
                 validarNumeroCartas();}
                  }
  validarNumeroCartas();
+
  for (let i=0; i<numeroCartas; i++){
     cartasSelecionadas.push(cartas[i]);
 }
 cartasSelecionadas.sort(comparador);
+
 
 for(let index=0; index<numeroCartas; index++){
     const cartasTemplate= 
@@ -59,12 +68,37 @@ for(let index=0; index<numeroCartas; index++){
       </div>`
     document.querySelector(".container-cartas").innerHTML+= cartasTemplate;   
 }
+function finalizarJogo(){
+    alert("cabo mizera");
+    validarNumeroCartas();
+}
 
 
 function virarClick(elemento){
     elemento.querySelector(".frente").classList.add("virada");
     elemento.querySelector(".verso").classList.add("desvirada");
-    
+
+    cartasEscolhidas.push(elemento);
+
+     if(cartasEscolhidas.length===2){
+         console.log('if de duas cartas')
+        if(cartasEscolhidas[0].innerHTML!== cartasEscolhidas[1].innerHTML){
+            
+            setTimeout(desvirar, 1000, cartasEscolhidas[0],cartasEscolhidas[1]);
+
+            console.log('são diferentes')
+            cartasEscolhidas=[];
+        }
+        else {
+            contadorCartasEncontradas+=2;
+            console.log('são iguais')
+            cartasEscolhidas=[];
+        
+            if(contadorCartasEncontradas===numeroCartas){
+                setTimeout(finalizarJogo, 1000);
+            }
+        }
+    } 
 }
 
 function comparador() { 
