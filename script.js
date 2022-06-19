@@ -14,7 +14,7 @@ const cartas = ['bobrossparrot.gif',
 'unicornparrot.gif'
 ];
 
-const cartasSelecionadas = [];
+let cartasSelecionadas = [];
 let cartasEscolhidas = [];
 let contadorCartasEncontradas = 0;
 
@@ -37,68 +37,89 @@ function validarNumeroCartas(){
 //  precisa ser apenas numeros pares %2===0
 // precisa ser sobre numeros 
 // precisa ser numero maior que 4 e menor que 15
-    if(numeroCartas < 4 || numeroCartas >15)
-    {
-         alert("Esse modo não é permitido, tente novamente");
-         validarNumeroCartas();
+    if(numeroCartas < 4 || numeroCartas >15){
+        alert("Esse modo não é permitido, tente novamente");
+        validarNumeroCartas();
 
     }        
-        if ( numeroCartas%2 === 0){}
-            else { 
-                alert("Só números pares por favor né, nem adianta botar letras...");
-                validarNumeroCartas();}
-                 }
- validarNumeroCartas();
-
- for (let i=0; i<numeroCartas; i++){
-    cartasSelecionadas.push(cartas[i]);
+    if (numeroCartas%2 !== 0){
+        alert("Só números pares por favor né, nem adianta botar letras...");
+        validarNumeroCartas();
+    }
+    iniciarJogo();
+    
 }
-cartasSelecionadas.sort(comparador);
+validarNumeroCartas();
 
 
-for(let index=0; index<numeroCartas; index++){
-    const cartasTemplate= 
-    `<div class="cartas" onclick="virarClick(this)">
-        <div class="frente face">
-        <img class="imagens" src="./imagem/front.png" alt="">
-        </div>
-        <div class="verso face">
-        <img src= "/imagem/${cartasSelecionadas[index]} " alt="">
-          </div>
-      </div>`
-    document.querySelector(".container-cartas").innerHTML+= cartasTemplate;   
+function iniciarJogo(){
+    document.querySelector(".container-cartas").innerHTML = '';
+    for (let i=0; i<numeroCartas; i++){
+        cartasSelecionadas.push(cartas[i]);
+    }
+
+    cartasSelecionadas.sort(comparador);
+
+    for(let index=0; index<numeroCartas; index++){
+        const cartasTemplate= 
+        `<div class="cartas" onclick="virarClick(this)">
+            <div class="frente face">
+            <img class="imagens" src="./imagem/front.png" alt="">
+            </div>
+            <div class="verso face">
+            <img class="imagens" src= "/imagem/${cartasSelecionadas[index]} " alt="">
+            </div>
+        </div>`
+        document.querySelector(".container-cartas").innerHTML+= cartasTemplate;   
+    }
 }
+
+
 function finalizarJogo(){
     alert("cabo mizera");
+    cartasSelecionadas=[];
+    contadorCartasEncontradas=0;
     validarNumeroCartas();
+
 }
+
 
 
 function virarClick(elemento){
-    elemento.querySelector(".frente").classList.add("virada");
-    elemento.querySelector(".verso").classList.add("desvirada");
+    /* verificar se o elemento possui virado
+    se possuir, já tá virado, não faz nada
+    se não possuir, executa o código que vira
+    */
+    const estaVirado = elemento.querySelector(".frente").classList.contains("virada");
+    
+    if(estaVirado === false) {
 
-    cartasEscolhidas.push(elemento);
+        elemento.querySelector(".frente").classList.add("virada");
+        elemento.querySelector(".verso").classList.add("desvirada");
 
-     if(cartasEscolhidas.length===2){
-         console.log('if de duas cartas')
-        if(cartasEscolhidas[0].innerHTML!== cartasEscolhidas[1].innerHTML){
-            
-            setTimeout(desvirar, 1000, cartasEscolhidas[0],cartasEscolhidas[1]);
+        cartasEscolhidas.push(elemento);
 
-            console.log('são diferentes')
-            cartasEscolhidas=[];
-        }
-        else {
-            contadorCartasEncontradas+=2;
-            console.log('são iguais')
-            cartasEscolhidas=[];
-        
-            if(contadorCartasEncontradas===numeroCartas){
-                setTimeout(finalizarJogo, 1000);
+        if(cartasEscolhidas.length===2){
+            console.log('if de duas cartas')
+            if(cartasEscolhidas[0].innerHTML!== cartasEscolhidas[1].innerHTML){
+                
+                setTimeout(desvirar, 1000, cartasEscolhidas[0],cartasEscolhidas[1]);
+
+                console.log('são diferentes')
+                cartasEscolhidas=[];
             }
-        }
-    } 
+            else {
+                contadorCartasEncontradas+=2;
+                console.log('são iguais')
+                cartasEscolhidas=[];
+            
+                if(contadorCartasEncontradas===numeroCartas){
+                    setTimeout(finalizarJogo, 1000);
+                }
+            }
+        } 
+    }
+    else{alert("Ta querendo trapacear né?! Não adianta clicar em uma carta que já ta virada ")}
 }
 
 function comparador() { 
