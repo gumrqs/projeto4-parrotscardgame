@@ -1,5 +1,27 @@
-const cartas=[];
+const cartas = ['bobrossparrot.gif', 
+'bobrossparrot.gif', 
+'explodyparrot.gif', 
+'explodyparrot.gif',
+'fiestaparrot.gif', 
+'fiestaparrot.gif', 
+'metalparrot.gif', 
+'metalparrot.gif', 
+'revertitparrot.gif',
+'revertitparrot.gif',
+'tripletsparrot.gif', 
+'tripletsparrot.gif', 
+'unicornparrot.gif',
+'unicornparrot.gif'
+];
+
+const cartasSelecionadas = [];
+
 let numeroCartas;
+
+function desvirar(elemento){
+    elemento.querySelector(".frente").classList.remove("virada");
+    elemento.querySelector(".verso").classList.remove("desvirada");
+}
 
 function validarNumeroCartas(){
     
@@ -14,27 +36,37 @@ function validarNumeroCartas(){
          validarNumeroCartas();
 
     }        
-        if ( numeroCartas%2 === 0)
-                {
-                alert("tudo certo, bora bora");
-                }
+        if ( numeroCartas%2 === 0){}
             else { 
                 alert("Só números pares por favor né, nem adianta botar letras...");
                 validarNumeroCartas();}
                  }
  validarNumeroCartas();
+ for (let i=0; i<numeroCartas; i++){
+    cartasSelecionadas.push(cartas[i]);
+}
+cartasSelecionadas.sort(comparador);
 
 for(let index=0; index<numeroCartas; index++){
     const cartasTemplate= 
-    `<div class="cartas">
-        
-        <div class="frente face" onclick="selecionar(this)">
-        <img class="imagens" src="./Arquivos Úteis - Projeto 04 - Parrot Card Game/front.png" alt="">
+    `<div class="cartas" onclick="virarClick(this)">
+        <div class="frente face">
+        <img class="imagens" src="./imagem/front.png" alt="">
         </div>
-        <div class="verso face" onclick="selecionar(this)">
-        <img src="./Arquivos Úteis - Projeto 04 - Parrot Card Game/fiestaparrot.gif" alt="">
-        </div>
+        <div class="verso face">
+        <img src= "/imagem/${cartasSelecionadas[index]} " alt="">
+          </div>
       </div>`
     document.querySelector(".container-cartas").innerHTML+= cartasTemplate;   
 }
 
+
+function virarClick(elemento){
+    elemento.querySelector(".frente").classList.add("virada");
+    elemento.querySelector(".verso").classList.add("desvirada");
+    
+}
+
+function comparador() { 
+	return Math.random() - 0.5; 
+}

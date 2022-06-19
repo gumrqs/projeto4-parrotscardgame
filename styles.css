@@ -23,7 +23,6 @@ body{
     position: relative;
     display: flex;
     margin-left: 34px;
-    background-color: black;
     margin-bottom: 20px;
 
 }
@@ -43,8 +42,8 @@ body{
 }
 
   .face {
-      width: 117px;
-      height: 146px;
+    width: 117px;
+    height: 146px;
     background-color: #A7E9AF;
     border-radius: 10px;
     box-shadow: 1px 1px 1px rgba(0,0,0,.3);
@@ -55,19 +54,21 @@ body{
     backface-visibility: hidden;
     transition: all .5s;
     transform-style: preserve-3d;
-  }
+    cursor: pointer;
+}
   .imagens{
-      width: 100px;
-      height: 100px;
+    width: 100px;
+    height: 100px;
   }
-  .verso{
+
+  .verso {
     transform: rotateY(180deg);
   }
 
-  .cartas:hover .verso {
+  .desvirada {
     transform: rotateY(0deg);
   }
 
-  .cartas:hover .frente{
+  .virada{
     transform: rotateY(-180deg);
   }
