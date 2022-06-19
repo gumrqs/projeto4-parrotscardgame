@@ -56,6 +56,10 @@ body{
     transition: all .5s;
     transform-style: preserve-3d;
   }
+  .imagens{
+      width: 100px;
+      height: 100px;
+  }
   .verso{
     transform: rotateY(180deg);
   }
