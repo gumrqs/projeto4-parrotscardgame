@@ -22,13 +22,7 @@ let numeroCartas;
 
 
 
-function desvirar(carta1, carta2){
-    carta1.querySelector(".frente").classList.remove("virada");
-    carta1.querySelector(".verso").classList.remove("desvirada");
 
-    carta2.querySelector(".frente").classList.remove("virada");
-    carta2.querySelector(".verso").classList.remove("desvirada");
-}
 
 function validarNumeroCartas(){
     
@@ -76,14 +70,20 @@ function iniciarJogo(){
 
 
 function finalizarJogo(){
-    alert("cabo mizera");
+    alert("duas palavras: PARA BÉNS!! - fim de jogo");
     cartasSelecionadas=[];
     contadorCartasEncontradas=0;
     validarNumeroCartas();
 
 }
 
+function desvirar(carta1, carta2){
+    carta1.querySelector(".frente").classList.remove("virada");
+    carta1.querySelector(".verso").classList.remove("desvirada");
 
+    carta2.querySelector(".frente").classList.remove("virada");
+    carta2.querySelector(".verso").classList.remove("desvirada");
+}
 
 function virarClick(elemento){
     /* verificar se o elemento possui virado
@@ -119,7 +119,7 @@ function virarClick(elemento){
             }
         } 
     }
-    else{alert("Ta querendo trapacear né?! Não adianta clicar em uma carta que já ta virada ")}
+    else{console.log("Ta querendo trapacear né?! Não adianta clicar em uma carta que já ta virada ")}
 }
 
 function comparador() { 
