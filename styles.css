@@ -17,13 +17,12 @@ body{
 }
 
 .cartas {
-    padding-left: 15px;
+    margin-right: 34px;
     min-width:117px;
     height: 146px;
     position: relative;
     display: flex;
-    margin-left: 34px;
-    margin-bottom: 20px;
+    margin-bottom: 34px;
 
 }
 .montante{
@@ -72,4 +71,3 @@ body{
   .virada{
     transform: rotateY(-180deg);
   }
-  
