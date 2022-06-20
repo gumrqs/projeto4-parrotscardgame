@@ -61,7 +61,7 @@ function iniciarJogo(){
             <img class="imagens" src="./imagem/front.png" alt="">
             </div>
             <div class="verso face">
-            <img class="imagens" src= "/imagem/${cartasSelecionadas[index]} " alt="">
+            <img class="imagens" src= "./imagem/${cartasSelecionadas[index]} " alt="">
             </div>
         </div>`
         document.querySelector(".container-cartas").innerHTML+= cartasTemplate;   
